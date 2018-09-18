@@ -152,8 +152,10 @@ int Parse(){
                         CurrentState = TagClose;
                         break;
                     case AttrValueEnd:
-                        tmpAttr = attr_create(attrName, attrValue);
-                        tag_add_attr(tmpTag, tmpAttr);
+                        if(attrName&&attrValue) {
+                            tmpAttr = attr_create(attrName, attrValue);
+                            tag_add_attr(tmpTag, tmpAttr);
+                        }
                         attrName=NULL;
                         attrValue=NULL;
                         CurrentState = TagClose;

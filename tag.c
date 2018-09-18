@@ -97,12 +97,6 @@ void FreeTag(XmlNode* tagNode) {
             free(tag->data->TagName);
 
         }
-        if(tag->data->Attributes){
-            for(int i = 0;i< tag->data->AttrCount;i++) {
-                FreeAttr((XmlNode*)tag->data->Attributes[i]);
-            }
-            free(tag->data->Attributes);
-        }
         free(tag->data);
     }
     freeNode(tagNode);
