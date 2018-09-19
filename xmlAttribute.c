@@ -31,5 +31,5 @@ void FreeAttr(XmlNode *attrNode){
 }
 void printAttr(XmlNode *attrNode){
     XmlAttr* attr = (XmlAttr*) attrNode;
-    printf("\t%s = %s\n", attr->data->AttrName, attr->data->AttrValue);
+    printf("\t%s=\"%s\"", attr->data->AttrName, attr->data->AttrValue);
 }

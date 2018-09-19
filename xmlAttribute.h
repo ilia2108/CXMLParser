@@ -12,5 +12,4 @@ XmlAttr* attr_create(char *name, char *value);
 
 void printAttr(XmlNode *attr);
 void FreeAttr(XmlNode *attr);
-
 #endif //XML_XMLATTRIBUTE_H

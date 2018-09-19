@@ -43,9 +43,7 @@ typedef struct _Node{
 
 typedef struct _TAGDATA{
     char *TagName;
-    int AttrCount;
-    int AttrCapacity;
-    XmlAttr **Attributes;
+    char HasText;
 } XmlTagData;
 
 typedef struct _TAG{
@@ -55,8 +53,6 @@ typedef struct _TAG{
 
 typedef struct _TEXTDATA{
     char *text;
-    int length;
-    int capacity;
 } XmlTextData;
 
 typedef struct _TEXT{

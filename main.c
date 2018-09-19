@@ -54,6 +54,7 @@ int Parse(){
     FILE *input = fopen("/Users/ilia_2108/Desktop/XML/input.xml", "r");
     int lineCount = 1;
     int charCount = 0;
+    XmlText *text = NULL;
     while((c = getc(input)) != EOF) {
         if(c == '\n'){
             lineCount++;
@@ -70,8 +71,11 @@ int Parse(){
                         break;
                     case Text:
                         if(onlyLetters(&buffer)) {
-                            tmpAttr = attr_create(strdup("Text"), buffer_getstr(&buffer));
-                            tag_add_attr(tmpTag, tmpAttr);
+                            text = tag_text_create(buffer_getstr(&buffer));
+                            if(!tag_add_text(tmpTag, text)){
+                                ErrorState = -1;
+                                goto end;
+                            }
                             buffer_free(&buffer);
                             CurrentState = TagOpen;
                         }
@@ -260,7 +264,7 @@ int Parse(){
     }
     fclose(input);
     if(ErrorState != -1) {
-        printTag(root);
+        printTag(root, 1);
     }
     else {
         printf("%d, %d", lineCount, charCount);
