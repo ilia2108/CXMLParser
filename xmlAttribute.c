@@ -29,7 +29,7 @@ void FreeAttr(XmlNode *attrNode){
     }
     freeNode(attrNode);
 }
-void printAttr(XmlNode *attrNode){
+void printAttr(FILE* file, XmlNode *attrNode){
     XmlAttr* attr = (XmlAttr*) attrNode;
-    printf("\t%s=\"%s\"", attr->data->AttrName, attr->data->AttrValue);
+    fprintf(file, "\t%s=\"%s\"", attr->data->AttrName, attr->data->AttrValue);
 }

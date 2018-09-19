@@ -17,7 +17,7 @@ int tag_add_child(XmlTag* tag,XmlTag* child);
 bool tag_find_tag(XmlTag *parent, XmlTag *child);
 int tag_remove_childtag(XmlTag *parent, XmlTag *child);
 void FreeTag(XmlNode* tagNode);
-void printTag(XmlTag *tag, int isFirst);
+void printTag(FILE *file, XmlTag *tag, int isFirst);
 XmlText* tag_text_create(char *text);
 int tag_add_text(XmlTag *tag, XmlText *text);
 int IsUniqueAttr(XmlTag *tag, char *name);

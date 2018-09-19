@@ -39,7 +39,7 @@ int clearLastStackElem(Buffer *buffer, Stack *stack){
     }
     return  -1;
 }
-int Parse(){
+XmlTag* Parse(){
     int ErrorState = 0;
     State CurrentState = Start;
     int c;
@@ -264,16 +264,15 @@ int Parse(){
     }
     fclose(input);
     if(ErrorState != -1) {
-        printTag(root, 1);
+        printTag(stdout, root, 1);
     }
     else {
         printf("%d, %d", lineCount, charCount);
     }
     buffer_free(&buffer);
     //free(buffer);
-    FreeTag((XmlNode*)root);
     stack_free(stack);
-    return ErrorState;
+    return root;
 
 }
 
@@ -289,6 +288,14 @@ bool onlyLetters(Buffer *buffer) {
 }
 
 int main() {
-    Parse();
+    XmlTag* tag = Parse();
+    FILE *file = fopen("out.xml", "w");
+    printTag(file, tag, 1);
+    fflush(file);
+    fclose(file);
+    FreeTag(tag);
+
+
+
     return 0;
 }

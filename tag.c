@@ -136,35 +136,34 @@ void FreeTag(XmlNode* tagNode) {
     }
     freeNode(tagNode);
 }
-void printTag(XmlTag *tag, int isFirst) {
+void printTag(FILE *file, XmlTag *tag, int isFirst) {
     int flag = 0;
-    printf("<%s", tag->data->TagName);
+    fprintf(file, "<%s", tag->data->TagName);
     if(isFirst){
         isFirst = 0;
-        printf(">\n");
+        fprintf(file, ">\n");
     }
     for(int i = 0; i< tag->ChildCount;i++){
         if(tag->children[i]->type==ATTR){
-            printf("%c",' ');
-            printAttr(tag->children[i]);
+            fprintf(file, "%c",' ');
+            printAttr(file, tag->children[i]);
         }
         else if(tag->children[i]->type == TEXT){
-            printf(">%s", ((XmlText*)tag->children[i])->data->text);
+            fprintf(file, ">%s", ((XmlText*)tag->children[i])->data->text);
             flag = 1;
         }
         else if(tag->children[i]->type == TAG){
-            printf("%c",'\r');
-            printTag((XmlTag*)tag->children[i], isFirst);
+            fprintf(file, "%c",'\r');
+            printTag(file, (XmlTag*)tag->children[i], isFirst);
             flag = 1;
         }
     }
 
     if(flag){
-        printf("</%s>\n", tag->data->TagName);
+        fprintf(file, "</%s>\n", tag->data->TagName);
     }
     else
-        printf("/>\n");
-
+        fprintf(file, "/>\n");
 }
 XmlText* tag_text_create(char *text){
     XmlText* res = malloc(sizeof(XmlText));

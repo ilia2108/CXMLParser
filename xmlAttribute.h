@@ -10,6 +10,6 @@ typedef struct _attribute {
 
 XmlAttr* attr_create(char *name, char *value);
 
-void printAttr(XmlNode *attr);
+void printAttr(FILE* file, XmlNode *attr);
 void FreeAttr(XmlNode *attr);
 #endif //XML_XMLATTRIBUTE_H
